@@ -22,18 +22,18 @@
                 "y": int: y
             }
         ],
-    "devices_coords": [
-            {
-                "id": int: id,
-                "x": int: x,
-                "y": int: y,
-                "name": string: name
-            },
-            .
-            .
-            .
-            .
-        ]
+        "devices_coords": [
+                {
+                    "id": int: id,
+                    "x": int: x,
+                    "y": int: y,
+                    "name": string: name
+                },
+                .
+                .
+                .
+                .
+            ]
     }
     ```
 3. **POST** `/devices-coordinates`
