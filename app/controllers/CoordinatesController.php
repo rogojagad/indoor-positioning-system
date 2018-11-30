@@ -60,48 +60,11 @@ class CoordinatesController extends BaseController
         return $response;
     }
 
-    public function storeAPAction()
-    {
-        $requestBody = $this->request->getJsonRawBody();
-
-        $apCoords = new ApCoordinates();
-
-        $res = $apCoords->save([
-            'ap1_x' => (int)$requestBody->ap1->x,
-            'ap1_y' => (int)$requestBody->ap1->y,
-            'ap2_x' => (int)$requestBody->ap2->x,
-            'ap2_y' => (int)$requestBody->ap2->y,
-            'ap3_x' => (int)$requestBody->ap3->x,
-            'ap3_y' => (int)$requestBody->ap3->y,
-        ]);
-
-        $response = new Response();
-        $response->setStatusCode(201, "CREATED");
-
-        return $response;
-    }
-
     private function buildResponseBody()
     {
-        $apCoords = ApCoordinates::find()->getLast();
         $devicesCoords = DeviceCoordinates::find();
 
-        $responseBody = [
-            'access_points_coords' => [
-                [
-                    'x' => $apCoords->ap1_x,
-                    'y' => $apCoords->ap1_y
-                ],
-                [
-                    'x' => $apCoords->ap2_x,
-                    'y' => $apCoords->ap2_y
-                ],
-                [
-                    'x' => $apCoords->ap3_x,
-                    'y' => $apCoords->ap3_y
-                ],
-            ],
-        ];
+        $responseBody = [];
 
         $deviceCoordResponse = [];
 

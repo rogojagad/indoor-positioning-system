@@ -32,13 +32,6 @@ class CoordinatesRoutes extends RouterGroup
                 'action' => 'storeDevices',
             ]
         );
-        
-        $this->addPost(
-            '/ap-coordinates',
-            [
-                'action' => 'storeAP',
-            ]
-        );
     }
 }
 
