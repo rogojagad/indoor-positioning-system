@@ -41,9 +41,9 @@
     Request:
     ```
     {
-    	"x" : 21,
-    	"y" : 93,
-    	"name" : "Rogo"
+    	"x" : int: x,
+    	"y" : int: y,
+    	"name" : string: name
     }
     ```
     
