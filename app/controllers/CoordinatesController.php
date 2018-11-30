@@ -28,9 +28,11 @@ class CoordinatesController extends BaseController
 
     public function storeDevicesAction()
     {
-        $x = (int)$this->request->getPost('x');
-        $y = (int)$this->request->getPost('y');
-        $name = $this->request->getPost('name');
+        $requestBody = $this->request->getJsonRawBody();
+
+        $x = (int)$requestBody->x;
+        $y = (int)$requestBody->y;
+        $name = $requestBody->name;
 
         $deviceCoord = DeviceCoordinates::findFirst("name = '". $name ."'");
 
