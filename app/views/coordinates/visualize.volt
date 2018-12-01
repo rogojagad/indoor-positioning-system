@@ -22,6 +22,12 @@
 
     <div id="canvas" style="overflow:hidden;position:relative;width:500px;height:500px;"></div>
 
+    <form action="/indoor-positioning/delete/coordinates" method="POST">
+        <button type="submit">Hapus</button>
+    </form>
+    <br>
+    <div id="devices-data"></div>
+
     <script>
         var gr=new jsGraphics(document.getElementById("canvas"));
         var redPen=new jsPen(new jsColor("red"),3);
@@ -34,6 +40,8 @@
 
         var objects = [];
 
+        var colorToDevice = {};
+
         gr.setCoordinateSystem("default");
         gr.showGrid(50,false);
     
@@ -42,7 +50,21 @@
         function refreshPosition() {
             $.getJSON('/indoor-positioning/coordinates', function(jd) {
                 redrawPosition(jd);
+                showDevicesData();
             });        
+        };
+
+        function showDevicesData() {
+            $('#devices-data').empty();
+
+            for (var i in colorToDevice)
+            {
+                $('#devices-data').append(
+                    '<p id="'+ colorToDevice[i].name +'">'+ colorToDevice[i].name +'</p>'
+                );
+
+                $('#' + colorToDevice[i].name).attr("style", "color: rgb("+ i +")");
+            }
         };
 
         function redrawPosition(jd) {
@@ -57,10 +79,12 @@
 
                 objects.length = [];
             }
-            console.log(objects);
+            
             for (var i = 0; i < devicesCount; i++)
             {
                 var obj = gr.drawCircle(pens[i], new jsPoint(jd.devices_coords[i].x, jd.devices_coords[i].y), 10);
+
+                colorToDevice[pens[i].color.getRGB()] = jd.devices_coords[i];
 
                 objects.push(obj);
             }

@@ -25,6 +25,10 @@ class CoordinatesController extends BaseController
     {
         $devicesCoords = DeviceCoordinates::find();
         $devicesCoords->delete();
+
+        $response = new Response();
+
+        $response->redirect('/')->send();
     }
 
     public function visualizeAction()

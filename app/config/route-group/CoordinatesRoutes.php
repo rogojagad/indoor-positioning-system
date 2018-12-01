@@ -33,8 +33,8 @@ class CoordinatesRoutes extends RouterGroup
             ]
         );
 
-        $this->addDelete(
-            '/coordinates',
+        $this->addPost(
+            '/delete/coordinates',
             [
                 'action' => 'destroy',
             ]
