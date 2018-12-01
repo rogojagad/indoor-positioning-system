@@ -32,6 +32,13 @@ class CoordinatesRoutes extends RouterGroup
                 'action' => 'storeDevices',
             ]
         );
+
+        $this->addDelete(
+            '/coordinates',
+            [
+                'action' => 'destroy',
+            ]
+        );
     }
 }
 

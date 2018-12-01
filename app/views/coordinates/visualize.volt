@@ -4,21 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{{ url("js/jsDraw2D.js") }}"></script>
     <title>Indoor Mapping</title>
 </head>
 <body>
-    <canvas id="map" width="600px" height="600px" style="border:1px solid #000000;">
+    <!-- <canvas id="map" width="100px" height="100px" style="border:1px solid #000000;">
         Your browser does not support the HTML5 canvas tag.
-    </canvas>
+    </canvas> -->
 
-    <script>
+    <!-- <script>
         var c = document.getElementById("map");
         var ctx = c.getContext("2d");
 
-        ctx.moveTo(0, 0);
-        ctx.lineTo(500, 500);
-        ctx.stroke(); 
+        ctx.fillRect(45, 43, 10, 10);
+    </script> -->
+
+    <div id="canvas" style="overflow:hidden;position:relative;width:500px;height:500px;"></div>
+
+    <script>
+        var gr=new jsGraphics(document.getElementById("canvas"));
+        var redPen=new jsPen(new jsColor("red"),3);
+        var greenPen=new jsPen(new jsColor("green"),3);
+        var bluePen=new jsPen(new jsColor("blue"),3);
+
+        var pens = [redPen, greenPen, bluePen];
+
+        var flag = false;
+
+        var objects = [];
+
+        gr.setCoordinateSystem("default");
+        gr.showGrid(50,false);
+    
+        setInterval( function(){ refreshPosition(); }, 2000);
+        
+        function refreshPosition() {
+            $.getJSON('/indoor-positioning/coordinates', function(jd) {
+                redrawPosition(jd);
+            });        
+        };
+
+        function redrawPosition(jd) {
+            var devicesCount = Object.keys(jd.devices_coords).length;
+            
+            if (flag == true)
+            {
+                for( var i = 0; i < devicesCount; i++)
+                {
+                    objects[i].remove();
+                }
+
+                objects.length = [];
+            }
+            console.log(objects);
+            for (var i = 0; i < devicesCount; i++)
+            {
+                var obj = gr.drawCircle(pens[i], new jsPoint(jd.devices_coords[i].x, jd.devices_coords[i].y), 10);
+
+                objects.push(obj);
+            }
+            
+            flag = true;
+        }
     </script>
 </body>
 </html>

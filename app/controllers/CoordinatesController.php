@@ -21,6 +21,12 @@ class CoordinatesController extends BaseController
         return $response;
     }
 
+    public function destroyAction()
+    {
+        $devicesCoords = DeviceCoordinates::find();
+        $devicesCoords->delete();
+    }
+
     public function visualizeAction()
     {
 

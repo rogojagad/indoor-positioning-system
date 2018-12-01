@@ -40,3 +40,8 @@ Created using Phalcon PHP Framework
     ```
     
     Response **201 CREATED**
+
+4. **DELETE** `/coordinates`
+    Untuk menghapus data koordinat device di database
+
+    Response **204 NO CONTENT**
