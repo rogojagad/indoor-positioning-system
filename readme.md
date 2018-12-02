@@ -3,6 +3,8 @@ Created using Phalcon PHP Framework
 
 # Dokumentasi API
 
+Semua endpoint diawali dengan prefix `/indoor-positioning`
+
 1. **GET** `/visualization`
     Untuk menampilkan halaman mapping, bisa langsung dibuka via browser
 
