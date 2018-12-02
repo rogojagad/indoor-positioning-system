@@ -43,7 +43,7 @@
         var colorToDevice = {};
 
         gr.setCoordinateSystem("default");
-        gr.showGrid(50,false);
+        gr.showGrid(50, false);
     
         setInterval( function(){ refreshPosition(); }, 2000);
         

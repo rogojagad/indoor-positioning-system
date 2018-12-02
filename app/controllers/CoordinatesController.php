@@ -40,8 +40,8 @@ class CoordinatesController extends BaseController
     {
         $requestBody = $this->request->getJsonRawBody();
 
-        $x = (int)$requestBody->x;
-        $y = (int)$requestBody->y;
+        $x = (int)$requestBody->x * 5;
+        $y = (int)$requestBody->y * 5;
         $name = $requestBody->name;
 
         $deviceCoord = DeviceCoordinates::findFirst("name = '". $name ."'");
