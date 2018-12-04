@@ -86,14 +86,14 @@
             for (var i in colorToDevice)
             {
                 $('#devices-data').append(
-                    '<p id="'+ colorToDevice[i].name +'">'+ colorToDevice[i].name +'</p>'
+                    '<p id="'+ colorToDevice[i].name +'">'+ colorToDevice[i].name + " " + colorToDevice[i].x / 5 + " , " + colorToDevice[i].y / 5 +'</p>'
                 );
 
                 $('#' + colorToDevice[i].name).attr("style", "color: rgb("+ i +")");
             }
         };
 
-        function redrawPosition(jd) {
+        function drawDevices(jd) {
             var devicesCount = Object.keys(jd.devices_coords).length;
             
             if (flag == true)
@@ -119,6 +119,28 @@
             }
             
             flag = true;
+        }
+
+        function drawAP(jd) {
+            var ap = jd.ap_coords
+
+            var apPen=new jsPen(new jsColor("black"),3);
+            var radPen=new jsPen(new jsColor("gray"),1);
+
+            // draw AP
+            gr.drawCircle(apPen, new jsPoint(ap.ap1x, ap.ap1y), 10);
+            gr.drawCircle(apPen, new jsPoint(ap.ap2x, ap.ap2y), 10);
+            gr.drawCircle(apPen, new jsPoint(ap.ap3x, ap.ap3y), 10);
+
+            // draw radius
+            gr.drawCircle(radPen, new jsPoint(ap.ap1x, ap.ap1y), 400);
+            gr.drawCircle(radPen, new jsPoint(ap.ap2x, ap.ap2y), 400);
+            gr.drawCircle(radPen, new jsPoint(ap.ap3x, ap.ap3y), 400);
+        }
+
+        function redrawPosition(jd) {
+            drawDevices(jd);
+            drawAP(jd);
         }
     </script>
 </body>

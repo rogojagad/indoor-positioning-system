@@ -95,8 +95,6 @@ class CoordinatesController extends BaseController
             $deviceCoord->name = $name;
 
             $deviceCoord->save();
-
-            
         }
 
         $response = new Response();
@@ -120,6 +118,19 @@ class CoordinatesController extends BaseController
         }
 
         $responseBody['devices_coords'] = $deviceCoordResponse;
+
+        $apCoords = ApCoordinates::find();
+
+        $apCoordsResponse = array(
+            "ap1x" => (int) $apCoords[0]->ap1_x * 5,
+            "ap1y" => (int) $apCoords[0]->ap1_y * 5,
+            "ap2x" => (int) $apCoords[0]->ap2_x * 5,
+            "ap2y" => (int) $apCoords[0]->ap2_y * 5,
+            "ap3x" => (int) $apCoords[0]->ap3_x * 5,
+            "ap3y" => (int) $apCoords[0]->ap3_y * 5,
+        );
+
+        $responseBody['ap_coords'] = $apCoordsResponse;
 
         return $responseBody;
     }
