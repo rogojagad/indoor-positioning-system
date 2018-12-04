@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type = "text/javascript" src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type = "text/javascript" src = "{{ url("js/jquery.min.js") }}"></script>
     <script src="{{ url("js/jsDraw2D.js") }}"></script>
     <title>Indoor Mapping</title>
 </head>
@@ -20,13 +20,39 @@
         ctx.fillRect(45, 43, 10, 10);
     </script> -->
 
-    <div id="canvas" style="overflow:hidden;position:relative;width:500px;height:500px;"></div>
+    <div id="canvas" style="overflow:hidden;position:relative;width:500px;height:500px;float:left"></div>
 
     <form action="/indoor-positioning/delete/coordinates" method="POST">
-        <button type="submit">Hapus</button>
+        <button type="submit">Reset</button>
+    </form>
+    <br>
+    <form action="" method="POST">
+        <p>Masukkan koordinat Access Point</p><br>
+        <p>Koordinat Access Point 1</p>
+        <label for="ap1x">x</label>
+        <input type="text" id="ap1x">
+        <label for="ap1y">y</label>
+        <input type="text" id="ap1y">
+
+        <p>Koordinat Access Point 2</p>
+        <label for="ap2x">x</label>
+        <input type="text" id="ap2x">
+        <label for="ap2y">y</label>
+        <input type="text" id="ap2y">
+
+        <p>Koordinat Access Point 3</p>
+        <label for="ap3x">x</label>
+        <input type="text" id="ap3x">
+        <label for="ap3y">y</label>
+        <input type="text" id="ap3y">
+        <br>
+        <br>
+        <button type="submit">Simpan</button>
     </form>
     <br>
     <div id="devices-data"></div>
+
+    <p>This app running at : </p> {{ hostIP }}
 
     <script>
         var gr=new jsGraphics(document.getElementById("canvas"));
@@ -72,12 +98,15 @@
             
             if (flag == true)
             {
-                for( var i = 0; i < devicesCount; i++)
+                if( devicesCount > 0 )
                 {
-                    objects[i].remove();
-                }
+                    for( var i = 0; i < devicesCount; i++)
+                    {
+                        objects[i].remove();
+                    }
 
-                objects.length = [];
+                    objects.length = [];
+                }
             }
             
             for (var i = 0; i < devicesCount; i++)

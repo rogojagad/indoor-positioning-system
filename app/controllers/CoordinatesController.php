@@ -33,7 +33,11 @@ class CoordinatesController extends BaseController
 
     public function visualizeAction()
     {
-
+        $this->view->setVars(
+            [
+                'hostIP' => (string) getHostByName(getHostName())
+            ]
+        );
     }
 
     public function storeDevicesAction()
@@ -45,7 +49,7 @@ class CoordinatesController extends BaseController
         $name = $requestBody->name;
 
         $deviceCoord = DeviceCoordinates::findFirst("name = '". $name ."'");
-
+        $status = "CREATED";
         if (! $deviceCoord)
         {
             $deviceCoord = new DeviceCoordinates();
@@ -55,6 +59,8 @@ class CoordinatesController extends BaseController
                 'y' => $y,
                 'name' => $name
             ]);
+
+            $status = "CEK";
         }   
         else{
             $deviceCoord->x = $x;
@@ -62,10 +68,14 @@ class CoordinatesController extends BaseController
             $deviceCoord->name = $name;
 
             $deviceCoord->save();
+
+            
         }
 
         $response = new Response();
-        $response->setStatusCode(201, "CREATED");
+        $response->setStatusCode(201);
+        $response->setContentType("application/json");
+        $response->setContent(json_encode(array( "name" => $name )));
 
         return $response;
     }
