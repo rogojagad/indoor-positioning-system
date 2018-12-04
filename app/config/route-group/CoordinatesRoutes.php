@@ -34,6 +34,13 @@ class CoordinatesRoutes extends RouterGroup
         );
 
         $this->addPost(
+            '/ap-coordinates',
+            [
+                'action' => 'storeAccessPoint',
+            ]
+        );
+
+        $this->addPost(
             '/delete/coordinates',
             [
                 'action' => 'destroy',

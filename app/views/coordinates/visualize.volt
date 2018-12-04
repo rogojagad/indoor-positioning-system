@@ -26,25 +26,25 @@
         <button type="submit">Reset</button>
     </form>
     <br>
-    <form action="" method="POST">
-        <p>Masukkan koordinat Access Point</p><br>
+    <form action="/indoor-positioning/ap-coordinates" method="POST">
+        <strong><p>Masukkan koordinat Access Point</p></strong>
         <p>Koordinat Access Point 1</p>
         <label for="ap1x">x</label>
-        <input type="text" id="ap1x">
+        <input type="text" id="ap1x" name="ap1x">
         <label for="ap1y">y</label>
-        <input type="text" id="ap1y">
+        <input type="text" id="ap1y" name="ap1y">
 
         <p>Koordinat Access Point 2</p>
         <label for="ap2x">x</label>
-        <input type="text" id="ap2x">
+        <input type="text" id="ap2x" name="ap2x">
         <label for="ap2y">y</label>
-        <input type="text" id="ap2y">
+        <input type="text" id="ap2y" name="ap2y">
 
         <p>Koordinat Access Point 3</p>
         <label for="ap3x">x</label>
-        <input type="text" id="ap3x">
+        <input type="text" id="ap3x" name="ap3x">
         <label for="ap3y">y</label>
-        <input type="text" id="ap3y">
+        <input type="text" id="ap3y" name="ap3y">
         <br>
         <br>
         <button type="submit">Simpan</button>

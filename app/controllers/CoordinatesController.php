@@ -26,6 +26,9 @@ class CoordinatesController extends BaseController
         $devicesCoords = DeviceCoordinates::find();
         $devicesCoords->delete();
 
+        $apCoords = ApCoordinates::find();
+        $apCoords->delete();
+
         $response = new Response();
 
         $response->redirect('/')->send();
@@ -38,6 +41,30 @@ class CoordinatesController extends BaseController
                 'hostIP' => (string) getHostByName(getHostName())
             ]
         );
+    }
+
+    public function storeAccessPointAction()
+    {
+        $apCoords = ApCoordinates::findFirst();
+
+        $res = $apCoords->save([
+            'ap1_x' => $this->request->getPost('ap1x'),
+            'ap1_y' => $this->request->getPost('ap1y'),
+            'ap2_x' => $this->request->getPost('ap2x'),
+            'ap2_y' => $this->request->getPost('ap2y'),
+            'ap3_x' => $this->request->getPost('ap3x'),
+            'ap3_y' => $this->request->getPost('ap3y'),
+        ]);
+
+        if ($res === false)
+        {
+            foreach ($apCoords->getMessages() as $message) {
+                echo $message, "\n";
+            }
+            die();
+        }
+
+        return $this->response->redirect()->send();
     }
 
     public function storeDevicesAction()
