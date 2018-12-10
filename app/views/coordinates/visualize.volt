@@ -71,7 +71,7 @@
         gr.setCoordinateSystem("default");
         gr.showGrid(50, false);
     
-        setInterval( function(){ refreshPosition(); }, 2000);
+        setInterval( function(){ refreshPosition(); }, 4000);
         
         function refreshPosition() {
             $.getJSON('/indoor-positioning/coordinates', function(jd) {
@@ -86,7 +86,7 @@
             for (var i in colorToDevice)
             {
                 $('#devices-data').append(
-                    '<p id="'+ colorToDevice[i].name +'">'+ colorToDevice[i].name + " " + colorToDevice[i].x / 5 + " , " + colorToDevice[i].y / 5 +'</p>'
+                    '<p id="'+ colorToDevice[i].name +'">'+ colorToDevice[i].name + " " + colorToDevice[i].x / 50 + " , " + colorToDevice[i].y / 50 +'</p>'
                 );
 
                 $('#' + colorToDevice[i].name).attr("style", "color: rgb("+ i +")");
@@ -123,7 +123,7 @@
 
         function drawAP(jd) {
             var ap = jd.ap_coords
-
+            
             var apPen=new jsPen(new jsColor("black"),3);
             var radPen=new jsPen(new jsColor("gray"),1);
 
